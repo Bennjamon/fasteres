@@ -1,0 +1,31 @@
+{
+  "name": "fasteres",
+  "version": "0.0.0",
+  "description": "A progressive backend framework to create API's fast and easy",
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "lint": "npm run lint --workspaces",
+    "lint:fix": "npm run lint:fix --workspaces"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bennjamon/fasteres.git"
+  },
+  "author": "Bennjamon (benjaminrivas500@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bennjamon/fasteres/issues"
+  },
+  "homepage": "https://github.com/Bennjamon/fasteres#readme",
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@types/node": "^18.14.0",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "create-fasteres-app": "^0.0.1",
+    "eslint-config-fasteres": "^0.0.1"
+  }
+}

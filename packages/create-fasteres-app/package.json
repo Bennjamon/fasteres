@@ -1,0 +1,22 @@
+{
+  "name": "create-fasteres-app",
+  "version": "0.0.1",
+  "description": "Create a fasteres app with a base configuration",
+  "main": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint lib/**/*.ts",
+    "lint:fix": "eslint --fix"
+  },
+  "license": "MIT",
+  "author": "Bennjamon (benjaminrivas500@gmail.com)",
+  "bin": {
+    "create-fasteres-app": "./bin/create-fasteres-app.js"
+  },
+  "devDependencies": {
+    "eslint": "^8.34.0",
+    "eslint-config-fasteres": "file:../config/eslint-config-fasteres",
+    "typescript": "^4.9.5"
+  }
+}
