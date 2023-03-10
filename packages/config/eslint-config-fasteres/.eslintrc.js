@@ -27,7 +27,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {
-    'no-console': ['error', { allow: ['log'] }],
+    'no-console': 'off',
     'import/extensions': 'off',
   },
 };

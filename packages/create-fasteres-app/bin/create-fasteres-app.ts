@@ -3,5 +3,5 @@
 import createApp from '../lib';
 
 if (require.main === module) {
-  createApp();
+  createApp(process.argv.slice(2));
 }
