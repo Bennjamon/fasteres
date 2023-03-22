@@ -2,6 +2,7 @@ module.exports = {
   env: {
     es2021: true,
     node: true,
+    jest: true,
   },
   extends: [
     'eslint:recommended',
@@ -29,5 +30,6 @@ module.exports = {
   rules: {
     'no-console': 'off',
     'import/extensions': 'off',
+    'no-useless-constructor': 'off',
   },
 };
