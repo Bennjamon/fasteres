@@ -1,5 +1,10 @@
 import { spawn, SpawnOptions } from 'child_process';
 
+interface ExecutionResult {
+  code: number;
+  result: string;
+}
+
 const defaultOptions: SpawnOptions = {
   cwd: process.cwd(),
   stdio: 'pipe',
@@ -9,7 +14,7 @@ export default function runCommand(
   command: string,
   args: string[],
   options: SpawnOptions = {}
-): Promise<void> {
+): Promise<ExecutionResult> {
   return new Promise((resolve, reject) => {
     const completeOptions = {
       ...defaultOptions,
@@ -29,7 +34,10 @@ export default function runCommand(
       if (code !== 0) {
         reject(output);
       } else {
-        resolve();
+        resolve({
+          code,
+          result: output,
+        });
       }
     });
   });
