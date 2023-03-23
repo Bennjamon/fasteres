@@ -1,4 +1,5 @@
 import { spawn, SpawnOptions } from 'child_process';
+import ExecutionError from './ExecutionError';
 
 interface ExecutionResult {
   code: number;
@@ -24,7 +25,9 @@ export default function runCommand(
     const child = spawn(command, args, completeOptions);
     let output = '';
 
-    child.on('error', reject);
+    child.on('error', (err) => {
+      reject(new ExecutionError(err.message));
+    });
 
     child.stdout?.on('data', (data: string) => {
       output += data;

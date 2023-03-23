@@ -2,6 +2,7 @@
 
 import childProcess from 'child_process';
 import runCommand from '../../lib/utils/runCommand';
+import ExecutionError from '../../lib/utils/ExecutionError';
 import MockChildProcess, { Result } from '../__mocks__/ChildProcess';
 
 jest.mock('child_process');
@@ -36,13 +37,13 @@ describe('runCommand', () => {
   });
 
   it('should return the command result', async () => {
-    const expectedResult: Result = {
+    const mockResult: Result = {
       code: 0,
       result: 'command result',
     };
 
     mockedChildProcessSpawn.mockImplementation(
-      () => new MockChildProcess(expectedResult) as any
+      () => new MockChildProcess(mockResult) as any
     );
 
     const result = await runCommand('echo', ['Hello world'], {
@@ -50,6 +51,21 @@ describe('runCommand', () => {
       stdio: 'pipe',
     });
 
-    expect(result).toEqual(expectedResult);
+    expect(result).toEqual(mockResult);
+  });
+
+  it('should reject error if command fails', async () => {
+    const mockResult: Result = {
+      error: 'command failed',
+    };
+    const expectedError = new ExecutionError('command failed');
+
+    mockedChildProcessSpawn.mockImplementation(
+      () => new MockChildProcess(mockResult) as any
+    );
+
+    expect(async () =>
+      runCommand('echo', ['Hello world'], { cwd: 'path/to/cwd' })
+    ).rejects.toStrictEqual(expectedError);
   });
 });

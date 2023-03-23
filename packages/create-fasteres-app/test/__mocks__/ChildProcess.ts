@@ -1,7 +1,7 @@
 export interface Result {
   result?: string;
   error?: string;
-  code: number;
+  code?: number | null;
 }
 
 type Event = 'error' | 'data' | 'close';
@@ -10,7 +10,8 @@ type EventHandler = (...args: any[]) => void;
 
 const createOn = (result: Result) => (event: Event, callback: EventHandler) => {
   if (event === 'error' && result.error !== undefined) {
-    callback(result.error);
+    const error = new Error(result.error);
+    callback(error);
   }
   if (event === 'data' && result.result !== undefined) {
     callback(result.result);
