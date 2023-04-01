@@ -34,11 +34,11 @@ export default function runCommand(
     });
 
     child.on('close', (code) => {
-      if (code !== 0) {
-        reject(output);
+      if (code && code !== 0) {
+        reject(new ExecutionError(output, code));
       } else {
         resolve({
-          code,
+          code: code || 0,
           result: output,
         });
       }

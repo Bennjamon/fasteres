@@ -9,11 +9,19 @@ type Event = 'error' | 'data' | 'close';
 type EventHandler = (...args: any[]) => void;
 
 const createOn = (result: Result) => (event: Event, callback: EventHandler) => {
-  if (event === 'error' && result.error !== undefined) {
+  if (
+    event === 'error' &&
+    result.error !== undefined &&
+    result.error !== null
+  ) {
     const error = new Error(result.error);
     callback(error);
   }
-  if (event === 'data' && result.result !== undefined) {
+  if (
+    event === 'data' &&
+    result.result !== undefined &&
+    result.result !== null
+  ) {
     callback(result.result);
   } else if (event === 'close') {
     callback(result.code);
@@ -27,7 +35,7 @@ export default class MockChildProcess {
     on(event: 'data', callback: (data: string) => void): void;
   };
 
-  constructor(private readonly result: Result) {
+  constructor(result: Result) {
     this.on = createOn(result);
     this.stdout = { on: createOn(result) };
   }

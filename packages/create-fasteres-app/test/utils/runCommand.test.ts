@@ -64,8 +64,24 @@ describe('runCommand', () => {
       () => new MockChildProcess(mockResult) as any
     );
 
-    expect(async () =>
+    await expect(
       runCommand('echo', ['Hello world'], { cwd: 'path/to/cwd' })
-    ).rejects.toStrictEqual(expectedError);
+    ).rejects.toThrowError(expectedError);
+  });
+
+  it("should reject error with command output if code isn't 0", async () => {
+    const mockResult: Result = {
+      result: 'command output',
+      code: 1,
+    };
+    const expectedError = new ExecutionError('command output', 1);
+
+    mockedChildProcessSpawn.mockImplementation(
+      () => new MockChildProcess(mockResult) as any
+    );
+
+    await expect(
+      runCommand('echo', ['Hello world'], { cwd: 'path/to/cwd' })
+    ).rejects.toThrowError(expectedError);
   });
 });
