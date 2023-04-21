@@ -31,5 +31,6 @@ module.exports = {
     'no-console': 'off',
     'import/extensions': 'off',
     'no-useless-constructor': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
   },
 };
