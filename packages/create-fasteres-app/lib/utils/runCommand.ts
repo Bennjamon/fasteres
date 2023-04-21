@@ -17,6 +17,22 @@ export default function runCommand(
   options: SpawnOptions = {}
 ): Promise<ExecutionResult> {
   return new Promise((resolve, reject) => {
+    if (command === undefined || command === null) {
+      throw new ExecutionError('Command is required');
+    }
+
+    if (typeof command !== 'string') {
+      throw new ExecutionError('Command must be a string');
+    }
+
+    if (!Array.isArray(args) || args.some((arg) => typeof arg !== 'string')) {
+      throw new ExecutionError('Arguments must be a string array');
+    }
+
+    if (typeof options !== 'object' || Array.isArray(options)) {
+      throw new ExecutionError('Options must be an object');
+    }
+
     const completeOptions = {
       ...defaultOptions,
       ...options,

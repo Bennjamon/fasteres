@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import Options from '../../lib/interfaces/Options';
 import parseArgs from '../../lib/utils/parseArgs';
 
@@ -49,5 +51,22 @@ describe('parseArgs', () => {
         appName: '',
       },
     ]);
+  });
+
+  it('should throw an error if arguments are not provided', () => {
+    expect(() => parseArgs()).toThrow(new Error('Arguments are required'));
+    expect(() => parseArgs(null)).toThrow(new Error('Arguments are required'));
+  });
+
+  it('should throw an error if arguments are not a string array', () => {
+    expect(() => parseArgs('Arguments')).toThrow(
+      new Error('Arguments must be a string array')
+    );
+    expect(() => parseArgs(31)).toThrow(
+      new Error('Arguments must be a string array')
+    );
+    expect(() => parseArgs([1, 2, 3])).toThrow(
+      new Error('Arguments must be a string array')
+    );
   });
 });

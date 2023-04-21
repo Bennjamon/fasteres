@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* eslint-disable */
 
 import childProcess from 'child_process';
@@ -83,5 +84,59 @@ describe('runCommand', () => {
     await expect(
       runCommand('echo', ['Hello world'], { cwd: 'path/to/cwd' })
     ).rejects.toThrowError(expectedError);
+  });
+
+  it('should reject error if command is not provided', async () => {
+    await expect(runCommand()).rejects.toThrowError(
+      new ExecutionError('Command is required')
+    );
+  });
+
+  it('should reject error if command is not a string', async () => {
+    await expect(runCommand(32)).rejects.toThrowError(
+      new ExecutionError('Command must be a string')
+    );
+    await expect(runCommand(true)).rejects.toThrowError(
+      new ExecutionError('Command must be a string')
+    );
+    await expect(runCommand([])).rejects.toThrowError(
+      new ExecutionError('Command must be a string')
+    );
+    await expect(runCommand({})).rejects.toThrowError(
+      new ExecutionError('Command must be a string')
+    );
+  });
+
+  it('should reject error if arguments is not a string array', async () => {
+    await expect(runCommand('Hello', 'World')).rejects.toThrowError(
+      new ExecutionError('Arguments must be a string array')
+    );
+    await expect(runCommand('Hello', 21)).rejects.toThrowError(
+      new ExecutionError('Arguments must be a string array')
+    );
+    await expect(runCommand('Hello', true)).rejects.toThrowError(
+      new ExecutionError('Arguments must be a string array')
+    );
+    await expect(runCommand('Hello', {})).rejects.toThrowError(
+      new ExecutionError('Arguments must be a string array')
+    );
+    await expect(runCommand('Hello', [1, 2, 3])).rejects.toThrowError(
+      new ExecutionError('Arguments must be a string array')
+    );
+  });
+
+  it('should reject error if options is not an object', async () => {
+    await expect(runCommand('echo', ['Hello'], 'options')).rejects.toThrowError(
+      new ExecutionError('Options must be an object')
+    );
+    await expect(runCommand('echo', ['Hello'], 54)).rejects.toThrowError(
+      new ExecutionError('Options must be an object')
+    );
+    await expect(runCommand('echo', ['Hello'], true)).rejects.toThrowError(
+      new ExecutionError('Options must be an object')
+    );
+    await expect(runCommand('echo', ['Hello'], [])).rejects.toThrowError(
+      new ExecutionError('Options must be an object')
+    );
   });
 });

@@ -16,15 +16,14 @@ const createOn = (result: Result) => (event: Event, callback: EventHandler) => {
   ) {
     const error = new Error(result.error);
     callback(error);
-  }
-  if (
+  } else if (
     event === 'data' &&
     result.result !== undefined &&
     result.result !== null
   ) {
     callback(result.result);
   } else if (event === 'close') {
-    callback(result.code);
+    callback(result.code || null);
   }
 };
 

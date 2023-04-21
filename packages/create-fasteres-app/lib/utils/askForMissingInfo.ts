@@ -5,6 +5,14 @@ import Options from '../interfaces/Options';
 export default async function askForMissingInfo(
   options: Partial<Options>
 ): Promise<Options> {
+  if (options === undefined || options === null) {
+    throw new Error('Options are required');
+  }
+
+  if (typeof options !== 'object' || Array.isArray(options)) {
+    throw new Error('Options must be an object');
+  }
+
   const prompts: DistinctQuestion[] = [];
   const result = {
     ...options,
