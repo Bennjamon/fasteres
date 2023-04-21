@@ -4,6 +4,10 @@ export default class ExecutionError extends Error {
       throw new Error('Message is required');
     }
 
+    if (typeof message !== 'string') {
+      throw new Error('Message must be a string');
+    }
+
     super(message);
   }
 }

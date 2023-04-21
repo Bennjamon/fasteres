@@ -29,4 +29,11 @@ describe('ExecutionError', () => {
   it('should throw an error if message is not provided', () => {
     expect(() => new ExecutionError()).toThrow('Message is required');
   });
+
+  it('should throw an error if message is not a string', () => {
+    expect(() => new ExecutionError(12)).toThrow('Message must be a string');
+    expect(() => new ExecutionError(true)).toThrow('Message must be a string');
+    expect(() => new ExecutionError([])).toThrow('Message must be a string');
+    expect(() => new ExecutionError({})).toThrow('Message must be a string');
+  });
 });
