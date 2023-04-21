@@ -27,6 +27,21 @@ export default async function askForMissingInfo(
     });
   }
 
+  if (options.template === undefined) {
+    prompts.push({
+      name: 'template',
+      type: 'list',
+      choices: ['javascript', 'typescript'],
+      message: 'What template do you want to use for your project?',
+    });
+  }
+
+  if (prompts.length === 0) {
+    console.log(prompts);
+
+    return result as Options;
+  }
+
   const answers = await inquirer.prompt(prompts);
 
   const keys = Object.keys(answers) as Array<keyof Options>;
