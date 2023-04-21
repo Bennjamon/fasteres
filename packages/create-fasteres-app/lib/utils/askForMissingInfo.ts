@@ -37,8 +37,6 @@ export default async function askForMissingInfo(
   }
 
   if (prompts.length === 0) {
-    console.log(prompts);
-
     return result as Options;
   }
 
