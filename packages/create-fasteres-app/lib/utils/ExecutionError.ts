@@ -8,6 +8,10 @@ export default class ExecutionError extends Error {
       throw new Error('Message must be a string');
     }
 
+    if ((typeof code !== 'number' && code !== null) || Number.isNaN(code)) {
+      throw new Error('Code must be a number');
+    }
+
     super(message);
   }
 }

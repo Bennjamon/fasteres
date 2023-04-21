@@ -36,4 +36,22 @@ describe('ExecutionError', () => {
     expect(() => new ExecutionError([])).toThrow('Message must be a string');
     expect(() => new ExecutionError({})).toThrow('Message must be a string');
   });
+
+  it('should throw an error if code is not a number', () => {
+    expect(() => new ExecutionError('Error message', 'code')).toThrow(
+      'Code must be a number'
+    );
+    expect(() => new ExecutionError('Error message', true)).toThrow(
+      'Code must be a number'
+    );
+    expect(() => new ExecutionError('Error message', [])).toThrow(
+      'Code must be a number'
+    );
+    expect(() => new ExecutionError('Error message', {})).toThrow(
+      'Code must be a number'
+    );
+    expect(() => new ExecutionError('Error message', NaN)).toThrow(
+      'Code must be a number'
+    );
+  });
 });
