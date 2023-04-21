@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import ExecutionError from '../../lib/utils/ExecutionError';
 
 describe('ExecutionError', () => {
@@ -22,5 +24,9 @@ describe('ExecutionError', () => {
 
     expect(error.message).toBe(message);
     expect(error.code).toBeNull();
+  });
+
+  it('should throw an error if message is not provided', () => {
+    expect(() => new ExecutionError()).toThrow('Message is required');
   });
 });
