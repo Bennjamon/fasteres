@@ -16,7 +16,7 @@ export default function parseArgs(args: string[]): Partial<Options> {
 
   return {
     appName: parsed._.join(' '),
-    template: parsed['--template'] || 'javascript',
+    template: parsed['--template'],
     packageManager: parsed['--package-manager'],
     skipInstall: parsed['--skip-install'] || false,
     skipGit: parsed['--skip-git'] || false,

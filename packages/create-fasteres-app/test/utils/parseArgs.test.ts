@@ -38,19 +38,6 @@ describe('parseArgs', () => {
     sets.forEach(runSet);
   });
 
-  it('should use javascript as default template if not provided', () => {
-    runSet([
-      '--package-manager npm --skip-install project-name',
-      {
-        template: 'javascript',
-        packageManager: 'npm',
-        skipInstall: true,
-        skipGit: false,
-        appName: 'project-name',
-      },
-    ]);
-  });
-
   it('should use an empty string as appName if not provided', () => {
     runSet([
       '--template javascript --package-manager npm --skip-install',
