@@ -18,9 +18,11 @@
   },
   "devDependencies": {
     "@types/inquirer": "^9.0.3",
+    "@types/mock-fs": "^4.13.1",
     "@types/ncp": "^2.0.5",
     "eslint": "^8.34.0",
     "eslint-config-fasteres": "file:../config/eslint-config-fasteres",
+    "mock-fs": "^5.2.0",
     "typescript": "^4.9.5"
   },
   "dependencies": {
