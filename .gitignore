@@ -3,5 +3,6 @@ node_modules
 packages/**/*.js
 packages/**/*.d.ts
 packages/**/*.js.map
+packages/*/coverage
 !packages/*/jest.config.js
 !packages/config/**

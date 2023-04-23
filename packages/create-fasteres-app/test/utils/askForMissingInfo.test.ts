@@ -15,13 +15,13 @@ describe('askForMissingInfo', () => {
 
   it('should ask for missing info', async () => {
     const partialOptions: Partial<Options> = {
-      appName: 'app',
-      packageManager: 'packageManager',
       skipGit: true,
       skipInstall: false,
     };
     const rest = {
       template: 'template',
+      appName: 'app',
+      packageManager: 'packageManager',
     };
 
     prompt.mockImplementation(() => rest as any);

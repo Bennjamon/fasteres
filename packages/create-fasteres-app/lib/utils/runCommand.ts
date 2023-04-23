@@ -1,7 +1,7 @@
 import { spawn, SpawnOptions } from 'child_process';
 import ExecutionError from './ExecutionError';
 
-interface ExecutionResult {
+export interface ExecutionResult {
   code: number;
   result: string;
 }
