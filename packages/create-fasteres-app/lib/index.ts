@@ -10,6 +10,4 @@ export default async function createApp(args: string[]): Promise<void> {
   const options = await askForMissingInfo(parsedOptions);
 
   await build(options);
-
-  // log fasteres with big letters
 }

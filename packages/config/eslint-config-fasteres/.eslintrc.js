@@ -26,8 +26,9 @@ module.exports = {
       },
     },
   },
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'prettier'],
   rules: {
+    'prettier/prettier': 'error',
     'no-console': 'off',
     'import/extensions': 'off',
     'no-useless-constructor': 'off',

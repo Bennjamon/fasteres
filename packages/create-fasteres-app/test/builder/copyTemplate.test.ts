@@ -27,9 +27,7 @@ const compare = (expected: FileStruct, dir: string): void => {
 
   const files = readdirSync(dir);
 
-  files.forEach((file) => {
-    expect(file in expected).toBe(true);
-  });
+  expect(files.sort()).toStrictEqual(Object.keys(expected).sort());
 
   for (const file in expected) {
     const content = expected[file];
@@ -90,9 +88,11 @@ describe('copyTemplate', () => {
       [templateDir]: {},
     });
 
+    const expectedError = new Error('Template javascript does not exist');
+
     await expect(() =>
       copyTemplate('javascript', './src')
-    ).rejects.toStrictEqual(new Error('Template javascript does not exist'));
+    ).rejects.toStrictEqual(expectedError);
   });
 
   it('should reject an error if directory already exists and is not empty', async () => {

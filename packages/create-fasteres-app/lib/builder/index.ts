@@ -4,6 +4,7 @@ import Options from '../interfaces/Options';
 import { INFO } from '../ui/prefixes';
 import copyTemplate from './copyTemplate';
 import installDependencies from './installDependencies';
+import intializeGit from './intializeGit';
 
 const cwd = process.cwd();
 
@@ -17,5 +18,9 @@ export default async function build(options: Options): Promise<void> {
 
   if (!options.skipInstall) {
     await installDependencies(projectPath, options.packageManager);
+  }
+
+  if (!options.skipGit) {
+    await intializeGit(projectPath);
   }
 }

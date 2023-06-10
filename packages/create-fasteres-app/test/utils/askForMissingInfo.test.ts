@@ -46,7 +46,7 @@ describe('askForMissingInfo', () => {
     expect(prompt).not.toHaveBeenCalled();
   });
 
-  it('should throw an error if options are not provided', async () => {
+  it('should reject an error if options are not provided', async () => {
     await expect(askForMissingInfo()).rejects.toStrictEqual(
       new Error('Options are required')
     );
@@ -55,7 +55,7 @@ describe('askForMissingInfo', () => {
     );
   });
 
-  it('should throw an error if are not an object', async () => {
+  it('should reject an error if are not an object', async () => {
     await expect(askForMissingInfo('options')).rejects.toStrictEqual(
       new Error('Options must be an object')
     );
